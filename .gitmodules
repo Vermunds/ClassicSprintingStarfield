@@ -1,0 +1,3 @@
+[submodule "extern/sfse"]
+	path = extern/sfse
+	url = https://github.com/ianpatt/sfse

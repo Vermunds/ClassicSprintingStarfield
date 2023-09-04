@@ -49,6 +49,8 @@ if (MSVC)
 endif ()
 
 find_package(spdlog REQUIRED CONFIG)
+add_subdirectory("extern/sfse/sfse_common")
+
 add_library(
 	${PROJECT_NAME}
 	SHARED
@@ -73,6 +75,8 @@ target_include_directories(
 )
 
 if (MSVC)
+	add_compile_definitions(_UNICODE)
+
 	target_compile_options(
 		${PROJECT_NAME}
 		PRIVATE
@@ -113,9 +117,9 @@ target_link_libraries(
 	${PROJECT_NAME}
 	PUBLIC
 		spdlog::spdlog
+		sfse::sfse_common
 		Version.lib
 )
-
 
 target_precompile_headers(
 	${PROJECT_NAME}
