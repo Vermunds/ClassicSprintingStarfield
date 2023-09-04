@@ -14,5 +14,3 @@ or you can run CMake manually (from the root of this repository):
 cmake -S . -B build
 cmake --build build --config Release
 ```
-
-The resulting dll file must be renamed to `.asi`.
