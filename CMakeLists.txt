@@ -7,7 +7,7 @@ set(VCPKG_TARGET_TRIPLET "x64-windows-static-md" CACHE STRING "target triplet" F
 
 project(
 	ClassicSprintingStarfield
-	VERSION 1.0.0
+	VERSION 2.0.1
 	LANGUAGES CXX
 )
 

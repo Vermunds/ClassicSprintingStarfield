@@ -20,9 +20,8 @@
 
 #include "version.h"
 
-const RelocAddr<uintptr_t*> processButtonFuncAddr = 0x1F48B30;
-const RelocAddr<uintptr_t*> codeCaveAddr = 0xF9C22B;
-const RelocAddr<uintptr_t*> playerCharacterSingletonAddr = 0x5594D28;
+const RelocAddr<uintptr_t*> processButtonFuncAddr = 0x1F48B00;
+const RelocAddr<uintptr_t*> playerCharacterSingletonAddr = 0x5595BA8;
 
 class ButtonEvent
 {
@@ -107,7 +106,7 @@ DLLEXPORT constinit auto SFSEPlugin_Version = []() noexcept {
 	data.addressIndependence = 0;
 	data.structureIndependence = SFSEPluginVersionData::kStructureIndependence_InitialLayout;
 
-	data.compatibleVersions[0] = RUNTIME_VERSION_1_7_23;
+	data.compatibleVersions[0] = RUNTIME_VERSION_1_7_29;
 	data.compatibleVersions[1] = 0;
 
 	data.seVersionRequired = 0;
@@ -170,14 +169,6 @@ DLLEXPORT bool SFSEAPI SFSEPlugin_Load(SFSEInterface* a_sfse)
 	// Install hook
 	uintptr_t hookAddr = processButtonFuncAddr.getUIntPtr() + 0xC;
 	g_playerCharacter = reinterpret_cast<PlayerCharacter**>(playerCharacterSingletonAddr.getUIntPtr());
-
-	//safeWriteJump(hookAddr, codeCaveAddr.getUIntPtr());
-
-	//safeWrite16(codeCaveAddr.getUIntPtr(), 0xB848);  // mov rax
-	//safeWrite64(codeCaveAddr.getUIntPtr() + 0x2, (uintptr_t)SprintHandler_ProcessButton_IsDown_Hook);
-	//safeWrite16(codeCaveAddr.getUIntPtr() + 0xA, 0xD0FF);                       // call rax
-	//safeWriteJump(codeCaveAddr.getUIntPtr() + 0xC, (uintptr_t)hookAddr + 0x5);  // jmp
-
 	g_branchTrampoline.write5Call(hookAddr, (uintptr_t)SprintHandler_ProcessButton_IsDown_Hook);
 
 	return true;
