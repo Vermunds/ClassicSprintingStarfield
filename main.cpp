@@ -20,8 +20,8 @@
 
 #include "version.h"
 
-const RelocAddr<uintptr_t*> processButtonFuncAddr = 0x1F484A0;
-const RelocAddr<uintptr_t*> playerCharacterSingletonAddr = 0x5598CB8;
+const RelocAddr<uintptr_t*> processButtonFuncAddr = 0x1F485C0;
+const RelocAddr<uintptr_t*> playerCharacterSingletonAddr = 0x55A3E38;
 
 class ButtonEvent
 {
@@ -60,7 +60,10 @@ bool SprintHandler_ProcessButton_IsDown_Hook(ButtonEvent* a_buttonEvent)
 	}
 	else if (a_buttonEvent->value == 0.0f && a_buttonEvent->heldDownSecs > 0.0f)
 	{
-		(*g_playerCharacter)->flag10E4 = static_cast<Flag10E4>(static_cast<uint8_t>((*g_playerCharacter)->flag10E4) & ~static_cast<uint8_t>(Flag10E4::kSprinting));
+		if (*g_playerCharacter)
+		{
+			(*g_playerCharacter)->flag10E4 = static_cast<Flag10E4>(static_cast<uint8_t>((*g_playerCharacter)->flag10E4) & ~static_cast<uint8_t>(Flag10E4::kSprinting));
+		}
 		return false;
 	}
 	return false;
@@ -106,7 +109,7 @@ DLLEXPORT constinit auto SFSEPlugin_Version = []() noexcept {
 	data.addressIndependence = 0;
 	data.structureIndependence = SFSEPluginVersionData::kStructureIndependence_InitialLayout;
 
-	data.compatibleVersions[0] = RUNTIME_VERSION_1_7_33;
+	data.compatibleVersions[0] = RUNTIME_VERSION_1_7_36;
 	data.compatibleVersions[1] = 0;
 
 	data.seVersionRequired = 0;
