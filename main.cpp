@@ -20,8 +20,8 @@
 
 #include "version.h"
 
-const RelocAddr<uintptr_t*> processButtonFuncAddr = 0x1F485C0;
-const RelocAddr<uintptr_t*> playerCharacterSingletonAddr = 0x55A3E38;
+const RelocAddr<uintptr_t*> processButtonFuncAddr = 0x1F4DB14;
+const RelocAddr<uintptr_t*> playerCharacterSingletonAddr = 0x560B3A8;
 
 class ButtonEvent
 {
@@ -35,24 +35,24 @@ static_assert(sizeof(ButtonEvent) == 0x50);  // Not actual size
 class PlayerCharacter
 {
 public:
-	enum class Flag10E4 : uint8_t
+	enum class Flag10C4 : uint8_t
 	{
 		kSprinting = 4
 	};
 
-	uint8_t unk[0x10E4];
-	Flag10E4 flag10E4;  // 10E4
+	uint8_t unk[0x10C4];
+	Flag10C4 flag10E4;  // 10E4
 	uint8_t pad10E5;
 	uint8_t pad10E6;
 	uint8_t pad10E7;
 };
-static_assert(sizeof(PlayerCharacter) == 0x10E8);  // Not actual size
+static_assert(sizeof(PlayerCharacter) == 0x10C8);  // Not actual size
 
 PlayerCharacter** g_playerCharacter;
 
 bool SprintHandler_ProcessButton_IsDown_Hook(ButtonEvent* a_buttonEvent)
 {
-	using Flag10E4 = PlayerCharacter::Flag10E4;
+	using Flag10E4 = PlayerCharacter::Flag10C4;
 
 	if (a_buttonEvent->value > 0.0f && a_buttonEvent->heldDownSecs == 0.0f)
 	{
@@ -109,7 +109,7 @@ DLLEXPORT constinit auto SFSEPlugin_Version = []() noexcept {
 	data.addressIndependence = 0;
 	data.structureIndependence = SFSEPluginVersionData::kStructureIndependence_InitialLayout;
 
-	data.compatibleVersions[0] = RUNTIME_VERSION_1_7_36;
+	data.compatibleVersions[0] = RUNTIME_VERSION_1_8_86;
 	data.compatibleVersions[1] = 0;
 
 	data.seVersionRequired = 0;
