@@ -20,8 +20,8 @@
 
 #include "version.h"
 
-const RelocAddr<uintptr_t*> processButtonFuncAddr = 0x1F4DB14;
-const RelocAddr<uintptr_t*> playerCharacterSingletonAddr = 0x560B3A8;
+const RelocAddr<uintptr_t*> processButtonFuncAddr = 0x1F4E284;
+const RelocAddr<uintptr_t*> playerCharacterSingletonAddr = 0x560E660;
 
 class ButtonEvent
 {
@@ -109,7 +109,7 @@ DLLEXPORT constinit auto SFSEPlugin_Version = []() noexcept {
 	data.addressIndependence = 0;
 	data.structureIndependence = SFSEPluginVersionData::kStructureIndependence_InitialLayout;
 
-	data.compatibleVersions[0] = RUNTIME_VERSION_1_8_86;
+	data.compatibleVersions[0] = RUNTIME_VERSION_1_8_88;
 	data.compatibleVersions[1] = 0;
 
 	data.seVersionRequired = 0;
